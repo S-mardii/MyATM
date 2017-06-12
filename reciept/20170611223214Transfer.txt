@@ -1,0 +1,10 @@
+My ATM Reciept
+================================================
+Card Number: aaa
+Date: Sun Jun 11 22:32:14 ICT 2017
+Transaction Type: Transfer
+
+Sent to: aaaAmount: 300.0
+Available Balance: 1567.0
+================================================
+Thank You
