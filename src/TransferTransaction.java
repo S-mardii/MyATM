@@ -1,3 +1,8 @@
+/*
+ * Project	:	ATM | Text Mode
+ * Author	:	Sam An Mardy
+ * 
+ * */
 
 public class TransferTransaction extends Transaction {
 	private Account reciever;

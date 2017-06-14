@@ -1,3 +1,9 @@
+/*
+ * Project	:	ATM | Text Mode
+ * Author	:	Sam An Mardy
+ * 
+ * */
+
 
 public class User {
 	private int id;

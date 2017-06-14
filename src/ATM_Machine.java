@@ -1,3 +1,9 @@
+/*
+ * Project	:	ATM | Text Mode
+ * Author	:	Sam An Mardy
+ * 
+ * */
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -20,7 +26,7 @@ public class ATM_Machine {
 		
 		//Open DB connection to the project
 		MySqlConn mySqlCon = new MySqlConn();
-		com.mysql.jdbc.ResultSet accountDB = (com.mysql.jdbc.ResultSet) mySqlCon.fetchAccountData();
+		ResultSet accountDB = (ResultSet) mySqlCon.fetchAccountData();
 		
 		//retrieve Account Value from DB
 		try {
@@ -51,6 +57,15 @@ public class ATM_Machine {
 		
 		do {
 			//ATM Login
+			
+			/* Accounts for Testing: 
+			 * CardNumber = aaa
+			 * PIN = 123
+			 * 
+			 * CardNumber = bbb
+			 * PIN = 123
+			 * */
+			
 			System.out.println("*** Log In ***");
 			System.out.println("-----------------------------------------------------------------------------------");
 		
@@ -128,7 +143,8 @@ public class ATM_Machine {
 					atm.transfer(currentAccount, recieverCardNumber, amount, getReciept);
 					pressAnyKeyToContinue();
 					break;
-				case 5:
+					
+				case 5: //Change PIN code
 					System.out.println("*** Change PIN Code ***");
 					System.out.print("Enter Current PIN Code: ");
 					String currentPinCode = sc.next();
@@ -159,7 +175,8 @@ public class ATM_Machine {
 						System.out.println("----------------------------------------------------------------------------------");
 					} 
 					break;
-				case 7:
+					
+				case 7: //close program
 					System.out.println("Are you sure? (Y/N)");
 					option = sc.next();
 					if (option.toUpperCase().equals("Y")) {
@@ -173,6 +190,7 @@ public class ATM_Machine {
 		sc.close();
 	}
 	
+	//Press Enter Key to Continue
 	public static void pressAnyKeyToContinue() { 
 		System.out.println();
 		System.out.println("Press Enter to continue...");

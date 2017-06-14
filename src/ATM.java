@@ -1,3 +1,9 @@
+/*
+ * Project	:	ATM | Text Mode
+ * Author	:	Sam An Mardy
+ * 
+ * */
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.io.File;
@@ -12,6 +18,7 @@ public class ATM {
 	Account account;
 	Date date;
 	
+	//login
 	public Account login(String cardNumber, String pinCode) {
 		for (int i=0; i<accountList.size(); i++) {
 			account = accountList.get(i);
@@ -26,8 +33,9 @@ public class ATM {
 		return account;
 	}
 	
+	//Withdraw Money
 	public void withdraw(Account account, double cashWithdraw, String getReciept) {
-		if (cashWithdraw >= 0) {
+		if ( cashWithdraw > 0) {
 			if (account.checkBalance(cashWithdraw)) {
 				double oldBalance = account.getBalance();
 				double newBalance = oldBalance - cashWithdraw;
@@ -48,6 +56,7 @@ public class ATM {
 		}
 	}
 	
+	//Deposit Money
 	public void deposit(Account account, double cashDeposit, String getReciept) {
 		if (cashDeposit > 0) {
 			if (account.checkDeposit(cashDeposit)) {
@@ -71,6 +80,7 @@ public class ATM {
 		}
 	}
 	
+	//Transfer Money to another Account
 	public void transfer(Account sender, String recieverCardNumber, double amount, String getReciept) {
 		if (amount > 0) {
 			if (sender.checkBalance(amount)) {
@@ -103,6 +113,8 @@ public class ATM {
 		}
 	}
 	
+	
+	//Find if an account exist in the System
 	public Account findAccount(String cardNumber) {
 		for (int i=0; i<accountList.size(); i++) {
 			Account account = accountList.get(i);
@@ -113,6 +125,7 @@ public class ATM {
 		return null;
 	}
 	
+	//Print receipt of each transaction to file
 	public void printReciept(Transaction transaction) {
 		String pattern = "yyyyMMddHHmmss";
 		SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
