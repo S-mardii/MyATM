@@ -1,0 +1,10 @@
+My ATM Reciept
+================================================
+Card Number: aaa
+Date: Wed Jun 14 22:55:56 ICT 2017
+Transaction Type: Withdraw
+
+Amount: 500.0
+Available Balance: 1993.0
+================================================
+Thank You
