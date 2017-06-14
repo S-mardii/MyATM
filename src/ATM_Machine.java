@@ -1,9 +1,6 @@
 import java.sql.*;
 import java.util.Scanner;
 
-import com.mysql.jdbc.ResultSet;
-
-
 public class ATM_Machine {
 	public static void main(String[] args) {
 		ATM atm = new ATM();
@@ -23,7 +20,7 @@ public class ATM_Machine {
 		
 		//Open DB connection to the project
 		MySqlConn mySqlCon = new MySqlConn();
-		ResultSet accountDB = (ResultSet) mySqlCon.fetchAccountData();
+		com.mysql.jdbc.ResultSet accountDB = (com.mysql.jdbc.ResultSet) mySqlCon.fetchAccountData();
 		
 		//retrieve Account Value from DB
 		try {
@@ -173,6 +170,7 @@ public class ATM_Machine {
 				}
 			}
 		} while(currentAccount == null);
+		sc.close();
 	}
 	
 	public static void pressAnyKeyToContinue() { 

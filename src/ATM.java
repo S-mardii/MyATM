@@ -27,51 +27,34 @@ public class ATM {
 	}
 	
 	public void withdraw(Account account, double cashWithdraw, String getReciept) {
-		if (account.checkBalance(cashWithdraw)) {
-			double oldBalance = account.getBalance();
-			double newBalance = oldBalance - cashWithdraw;
-			account.setBalance(newBalance);
-			Transaction transaction = new Transaction("Withdraw", account, cashWithdraw, oldBalance, newBalance);
-			transaction.viewTransaction();
-			transactionList.add(transaction);
-			
-			if (getReciept.toUpperCase().equals("Y"))
-				printReciept(transaction);
+		if (cashWithdraw >= 0) {
+			if (account.checkBalance(cashWithdraw)) {
+				double oldBalance = account.getBalance();
+				double newBalance = oldBalance - cashWithdraw;
+				account.setBalance(newBalance);
+				Transaction transaction = new Transaction("Withdraw", account, cashWithdraw, oldBalance, newBalance);
+				transaction.viewTransaction();
+				transactionList.add(transaction);
+				
+				if (getReciept.toUpperCase().equals("Y"))
+					printReciept(transaction);
+			}
+			else {
+				System.out.println("Sorry! Insufficent Balance for this Transaction.");
+			}
 		}
 		else {
-			System.out.println("Sorry! Insufficent Balance for this Transaction.");
+			System.out.println("Invalid Input Data");
 		}
 	}
 	
 	public void deposit(Account account, double cashDeposit, String getReciept) {
-		if (account.checkDeposit(cashDeposit)) {
-			double oldBalance = account.getBalance();
-			double newBalance = oldBalance + cashDeposit;
-			account.setBalance(newBalance);
-			Transaction transaction = new Transaction("Deposit", account, cashDeposit, oldBalance, newBalance);
-			transaction.viewTransaction();
-			transactionList.add(transaction);
-			printReciept(transaction);
-			
-			if (getReciept.toUpperCase().equals("Y"))
-				printReciept(transaction);
-		}
-		else {
-			System.out.println("Sorry! Insufficent Balance for this Transaction.");
-		}
-	}
-	
-	public void transfer(Account sender, String recieverCardNumber, double amount, String getReciept) {
-		if (sender.checkBalance(amount)) {
-			double senderOldBalance = sender.getBalance();
-			double senderNewBalance = senderOldBalance - amount;
-			sender.setBalance(senderNewBalance);
-			
-			Account reciever = findAccount(recieverCardNumber);
-			if (reciever != null) {
-				double recieverBalance = reciever.getBalance() + amount;
-				reciever.setBalance(recieverBalance);
-				Transaction transaction = new TransferTransaction("Transfer", sender, reciever, amount, senderOldBalance, senderNewBalance);
+		if (cashDeposit > 0) {
+			if (account.checkDeposit(cashDeposit)) {
+				double oldBalance = account.getBalance();
+				double newBalance = oldBalance + cashDeposit;
+				account.setBalance(newBalance);
+				Transaction transaction = new Transaction("Deposit", account, cashDeposit, oldBalance, newBalance);
 				transaction.viewTransaction();
 				transactionList.add(transaction);
 				printReciept(transaction);
@@ -80,11 +63,43 @@ public class ATM {
 					printReciept(transaction);
 			}
 			else {
-				System.out.println("Wrong Card Number: Destination is not Found!");
+				System.out.println("Sorry! Insufficent Balance for this Transaction.");
 			}
 		}
 		else {
-			System.out.println("Sorry! Insufficent Balance for this Transaction.");
+			System.out.println("Invalid Input Data");
+		}
+	}
+	
+	public void transfer(Account sender, String recieverCardNumber, double amount, String getReciept) {
+		if (amount > 0) {
+			if (sender.checkBalance(amount)) {
+				double senderOldBalance = sender.getBalance();
+				double senderNewBalance = senderOldBalance - amount;
+				sender.setBalance(senderNewBalance);
+				
+				Account reciever = findAccount(recieverCardNumber);
+				if (reciever != null) {
+					double recieverBalance = reciever.getBalance() + amount;
+					reciever.setBalance(recieverBalance);
+					Transaction transaction = new TransferTransaction("Transfer", sender, reciever, amount, senderOldBalance, senderNewBalance);
+					transaction.viewTransaction();
+					transactionList.add(transaction);
+					printReciept(transaction);
+					
+					if (getReciept.toUpperCase().equals("Y"))
+						printReciept(transaction);
+				}
+				else {
+					System.out.println("Wrong Card Number: Destination is not Found!");
+				}
+			}
+			else {
+				System.out.println("Sorry! Insufficent Balance for this Transaction.");
+			}
+		}
+		else {
+			System.out.println("Invalid Input Data");
 		}
 	}
 	

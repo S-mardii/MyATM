@@ -4,7 +4,7 @@ import java.sql.*;
 public class MySqlConn {
 	//JDBC Driver name and Database URL
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_URL = "jdbc:mysql://localhost:3306/atm";
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/atm?autoReconnect=true&&useSSL=false";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "";
 	

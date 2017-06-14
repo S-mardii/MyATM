@@ -1,5 +1,3 @@
-import com.mysql.jdbc.ResultSet;
-
 public class Account {
 	private int id;
 	private String cardNumber;
